@@ -1,0 +1,13 @@
+{
+    "ID": 7600,
+    "EventID": "20240101070418.0001_1",
+    "ReportTime": "2024-02-22 15:12:27",
+    "ReportNum": 1,
+    "OriginTime": "2024-03-03 23:20:00",
+    "HypoCenter": "测试报(请勿惊慌)",
+    "Latitude": 31.67,
+    "Longitude": 104.13,
+    "Magunitude": 12,
+    "Depth": 1.14514,
+    "MaxIntensity": 4.7
+}

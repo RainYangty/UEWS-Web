@@ -10,7 +10,6 @@
         src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=webgl&ak=FlbWYf8Htrg9j3SQAokFG7qwBBHWbqXg"></script>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>UEWS</title>
 </head>
 
@@ -45,33 +44,13 @@
         </form>
         <button id="myBtn3" class="bu3">OK</button>
         <button id="myBtn4" class="bu4">取消</button>
+        <button id="myBtn7" class="bu7">模拟</button>
     </div>
     
 
     <div id="textbox">当前无生效中的地震预警</div>
-    <div id="seisbox_background">
-        <div id = "seis_type2">地震站数据</div>
-        <div id = "seisbox">
-            <div id="seisBar0">
-                <div style="height:30px;width:300px;">
-                    <canvas id="seis_chart0"></canvas>
-                </div>
-                <div id="seisMaxInt0">-</div>
-                <div id="seisLocate0"></div>
-            </div>
-        </div>
-    </div>
     <div id="warning_textbox">当前无错误</div>
-    <div id = "seis_background">
-        <div id = "seis_type">本地最近测站</div>
-        <div id="seis">
-            <div id="seislocal">重庆   北碚</div>
-            <div id="seispga">最大加速度</div>
-            <div id="seisint">震度  烈度</div>
-            <div id="seisMaxInt">-</div>
-        </div>
-    </div>
-
+    
     <!--地震预警框icl\sceew-->
     <div id="eewmainBar">
         <div id="eewmainRight">
@@ -154,7 +133,7 @@
 
 </html>
 <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/getseis.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/updatetar.js" type="text/javascript" charset="utf-8"></script>
 <script>
     console.log("UDTW \nPowered By RainYang")
     //console.log(document.cookie)

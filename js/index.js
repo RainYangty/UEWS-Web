@@ -150,6 +150,10 @@ document.getElementById("myBtn2").addEventListener("click", function () {
     backcenter();
 });
 
+document.getElementById("myBtn7").addEventListener("click", function () {
+    window.location.href = 'http://127.0.0.1';
+});
+
 /*if ($(window).width() < 800) {
     alert("网页显示异常，请尝试调大网页宽度");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + " <br>网页显示异常，请尝试调大网页宽度或高度" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据以及icl相关数据，地震速报信息来源为中国地震台网速报公开数据";
@@ -290,7 +294,7 @@ var warningtf = false;
 function sceew() //四川地震局
 {
     var starttime = Date.now();
-    $.getJSON("sc_eew.json?" + Date.now(),//https://api.wolfx.jp/sc_eew.json
+    $.getJSON("https://api.wolfx.jp/sc_eew.json?" + Date.now(),//https://api.wolfx.jp/sc_eew.json
         function (json) {
             var endtime = Date.now();
             document.getElementById("latency").innerHTML = (endtime - starttime) + "ms";
@@ -367,7 +371,6 @@ function sceew() //四川地震局
                 $("#eewmainBar2").css("visibility", "hidden");
                 $("#countDown").css("visibility", "hidden");
                 document.getElementById("seis_type").innerHTML = "本地最近测站";
-                $("#list-background").css("height", "calc(100% - 160px)");
                 //map.removeOverlay(sWave);
                 //map.removeOverlay(pWave);
                 map.clearOverlays();
@@ -387,7 +390,7 @@ function sceew() //四川地震局
 }
 function icl() //ICL地震预警网
 {
-    $.getJSON("eg.json?" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
+    $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=?" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
         function (json) {
             iclLat = json.data[0].latitude;
             icllastId = json.data[0].eventId;
@@ -451,7 +454,6 @@ function icl() //ICL地震预警网
                 $("#eewmainBar2").css("visibility", "hidden");
                 $("#countDown").css("visibility", "hidden");
                 document.getElementById("seis_type").innerHTML = "本地最近测站";
-                $("#list-background").css("height", "calc(100% - 160px)");
 
                 //map.removeOverlay(sWave);
                 //map.removeOverlay(pWave);
@@ -568,7 +570,6 @@ function countDown() {
     if (timeMinus <= 60000 * 60 + arrivetime * 60000 && _open && !cancel) {//&& localInt >= minInt
         $("#countDown").css("visibility", "visible");
         document.getElementById("seis_type").innerHTML = "震中最近测站";
-        $("#list-background").css("height", "calc(100% - 300px)");
         //setInterval(countdownRun, 1000, Lat, Lon, OriTime);
         if (!warningtf) {
             if (localInt >= 3.0 && localInt < 5.0) {
@@ -784,7 +785,7 @@ function countdownRun() {
 
 backcenter();
 setInterval(sceew, 2000);
-setInterval(icl, 2000);
+//setInterval(icl, 2000);
 setInterval(drawwave, 100);
 setInterval(settime, 100);
 setInterval(countdownAudio, 1000);

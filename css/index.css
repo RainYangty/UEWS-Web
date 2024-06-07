@@ -56,12 +56,12 @@
 
 @font-face {
     font-family: OPPOSans-H;
-    src: url("https://wolfx.jp/fonts/OPPOSans3.0cn-Bold.woff2") format("woff2");
+    src: url("fonts/OPPOSans3.0cn-Bold.woff2") format("woff2");
 }
 
 @font-face {
     font-family: OPPOSans-B;
-    src: url("https://wolfx.jp/fonts/OPPOSans3.0cn-Medium.woff2") format("woff2");
+    src: url("fonts/OPPOSans3.0cn-Medium.woff2") format("woff2");
 }
 
 ::-webkit-scrollbar {
@@ -401,7 +401,7 @@ body {
     right: 0px;
     top: 0px;
     width: 350px;
-    height: calc(100% - 160px);
+    height: calc(100% - 30px);
     z-index: 99991;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.1);
@@ -685,7 +685,7 @@ body {
     visibility: hidden;
     position: absolute;
     font-weight: normal;
-    bottom: 160px;
+    bottom: 30px;
     right: 0px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.1);
@@ -886,6 +886,27 @@ body {
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
     visibility: hidden;
+    z-index: 99999;
+}
+
+.bu7 {
+    visibility: hidden;
+    position: absolute;
+    width: 60px;
+    height: 25px;
+    color: #f1f1f1;
+    display: block;
+    border-radius: 20px;
+    border: 1px solid #8c8c8c;
+    background-color: transparent;
+    transition: border-color 0.2s ease-in-out;
+    background-repeat: no-repeat;
+    background-position: right 2% center;
+    background-size: 2rem 2rem;
+    right: 350px;
+    bottom: 0px;
+    font-weight: bold;
+    font-family: OPPOSans-B, sans-serif;
     z-index: 99999;
 }
 
