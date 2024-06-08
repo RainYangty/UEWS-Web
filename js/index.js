@@ -390,7 +390,7 @@ function sceew() //四川地震局
 }
 function icl() //ICL地震预警网
 {
-    $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=?" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
+    $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
         function (json) {
             iclLat = json.data[0].latitude;
             icllastId = json.data[0].eventId;
@@ -785,7 +785,7 @@ function countdownRun() {
 
 backcenter();
 setInterval(sceew, 2000);
-//setInterval(icl, 2000);
+setInterval(icl, 2000);
 setInterval(drawwave, 100);
 setInterval(settime, 100);
 setInterval(countdownAudio, 1000);
