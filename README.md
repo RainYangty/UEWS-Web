@@ -36,7 +36,7 @@ UEWS 目前并不稳定、完善，随时可能崩溃，若遇到问题，欢迎
 由于不可抗拒因素，已下线测站实时数据显示
 
 ## 本地模拟
-当本地运行惹[UEWS-Delay](https://github.com/RainYangty/UEWS-Delay) Web端后，可以在UEWS-Web网页中很便利地跳转到模拟界面，记得考虑端口冲突问题呐
+当本地运行惹[UEWS-Delay](https://github.com/RainYangty/UEWS-Delay) Web端且地址为127.0.0.1:80(默认)，可以在UEWS-Web网页中很便利地跳转到模拟界面
 
 ## 协议
 本仓库代码依据MIT License协议开源
