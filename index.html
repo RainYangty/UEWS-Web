@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/warningbox.css">
     <link rel="shortcut icon" href="favicon.ico" >
     <script type="text/javascript"
         src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=webgl&ak=FlbWYf8Htrg9j3SQAokFG7qwBBHWbqXg"></script>
@@ -83,7 +84,7 @@
     <div id="list-background">
         <div id = "seis_type">CENC地震列表</div>
         <div id = "list">
-            <div id="mainBar">
+            <div id="mainBar" onclick="getinfo(1)">
                 <div id="mainLeft">
                     <div id="mainTime">01/01 00:00</div>
                     <div id="mainEpicenter">载入中</div>
@@ -95,7 +96,7 @@
                 </div>
                 <div id="mainMaxInt">-</div>
             </div>
-            <div id="subBar2">
+            <div id="subBar2" onclick="getinfo(2)">
                 <div id="subLeft2">
                     <div id="subTime2">01/01 00:00</div>
                     <div id="subEpicenter2">载入中</div>
@@ -103,7 +104,7 @@
                 </div>
                 <div id="subMaxInt2">-</div>
             </div>
-            <div id="subBar3">
+            <div id="subBar3" onclick="getinfo(3)">
                 <div id="subLeft3">
                     <div id="subTime3">01/01 00:00</div>
                     <div id="subEpicenter3">载入中</div>
@@ -129,6 +130,16 @@
             </div>
         </div>
     </div>
+    <section>
+        <div class="modal-box" id="modal-box">
+            <i class="fa-regular fa-circle-check"></i>
+            <h2>提示</h2>
+            <h3 id="warninginfo"></h3>
+
+            <div class="buttons">
+            <button id="close-btn" class="close-btn">OK</button>
+        </div>
+    </section>
 </body>
 
 </html>
@@ -141,7 +152,7 @@
     //console.log(getCookie("la"))
 
     for (ii = 4; ii < 50; ii++) {
-        $("#subBar" + Number(ii - 1)).after('<div id="subBar' + ii + '"><div id="subLeft' + ii + '"><div id="subTime' + ii + '">01/01 00:00</div><div id="subEpicenter' + ii + '">载入中</div><div id="subMagnitude' + ii + '">M0.0</div></div><div id="subMaxInt' + ii + '">-</div></div>')
+        $("#subBar" + Number(ii - 1)).after('<div id="subBar' + ii + '" onclick="getinfo(' + ii + ')"><div id="subLeft' + ii + '"><div id="subTime' + ii + '">01/01 00:00</div><div id="subEpicenter' + ii + '">载入中</div><div id="subMagnitude' + ii + '">M0.0</div></div><div id="subMaxInt' + ii + '">-</div></div>')
     }
 
     var cencmd5 = 0;

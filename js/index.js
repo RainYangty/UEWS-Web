@@ -75,6 +75,12 @@ map.addControl(scaleCtrl);
 map.enableScrollWheelZoom(true);
 var _open = true;
 
+const closeBtn = document.querySelector(".close-btn"),
+        section = document.querySelector("section");
+
+closeBtn.addEventListener("click", () =>
+    section.classList.remove("active")
+);
 
 /*window.addEventListener("load", function () {
     setTimeout(function () {
@@ -95,7 +101,9 @@ function getCookie(name) {
 
 if (getCookie("la") == null) {
     _open = false;
-    alert("请在加载完毕后页面左下角输入当前位置经纬度坐标（仅支持东北半球，请勿输入英文），否则将关闭倒计时功能(将以cookie形式存储在本地)");
+    document.getElementById("warninginfo").innerHTML = "请在加载完毕后页面左下角输入当前位置经纬度坐标（仅支持东北半球，请勿输入英文），否则将关闭倒计时功能(将以cookie形式存储在本地)";
+
+    section.classList.add("active");
     $("#1").css("visibility", "visible");
     $("#2").css("visibility", "visible");
     $("#myBtn3").css("visibility", "visible");
@@ -134,7 +142,9 @@ document.getElementById("myBtn4").addEventListener("click", function () {
 });
 document.getElementById("myBtn3").addEventListener("click", function () {
     if (isNaN(Number(document.getElementById("2").value)) || isNaN(Number(document.getElementById("1").value)) || document.getElementById("1").value < 0 || document.getElementById("1").value > 180 || document.getElementById("2").value > 90 || document.getElementById("2").value < 0 || document.getElementById("1").value == "" || document.getElementById("2").value == "") {
-        alert("输入不合规，请重新输入（仅支持东北半球，请勿输入英文）");
+        document.getElementById("warninginfo").innerHTML = "输入不合规，请重新输入（仅支持东北半球，请勿输入英文）";
+
+        section.classList.add("active");
     }
     else {
         var oDate = new Date();
@@ -154,18 +164,26 @@ document.getElementById("myBtn7").addEventListener("click", function () {
     window.location.href = 'http://127.0.0.1';
 });
 
-/*if ($(window).width() < 800) {
-    alert("网页显示异常，请尝试调大网页宽度");
+if ($(window).width() < 800) {
+    document.getElementById("warninginfo").innerHTML = "网页显示异常，请尝试调大网页宽度";
+
+    section.classList.add("active");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + " <br>网页显示异常，请尝试调大网页宽度或高度" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据以及icl相关数据，地震速报信息来源为中国地震台网速报公开数据";
 }
 else if ($(window).width() < 360 || $(window).height() < 160) {
-    alert("网页显示异常，请尝试调大网页宽度或高度");
+    document.getElementById("warninginfo").innerHTML = "网页显示异常，请尝试调大网页宽度或高度";
+
+    section.classList.add("active");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + " <br>网页显示异常，请尝试调大网页宽度或高度" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据以及icl相关数据，地震速报信息来源为中国地震台网速报公开数据";
+    $("#list-background").css("visibility", "hidden");
     $("#list").css("visibility", "hidden");
 }
 if ($(window).width() < 1000) {
-    alert("鉴于宽度不足，将隐藏CENC地震速报栏");
+    document.getElementById("warninginfo").innerHTML = "鉴于宽度不足，将隐藏CENC地震速报栏";
+
+    section.classList.add("active");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + " <br>鉴于宽度不足，将隐藏CENC地震速报栏" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据以及icl相关数据，地震速报信息来源为中国地震台网速报公开数据";
+    $("#list-background").css("visibility", "hidden");
     $("#list").css("visibility", "hidden");
     $("#allmap").css("width", "100%");
     $("#allmap").css("height", "100%");
@@ -175,10 +193,11 @@ if ($(window).width() < 1000) {
     $("html, body").css("width", "100%");
 }
 else {
+    $("#list-background").css("visibility", "visible");
     $("#list").css("visibility", "visible");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据，地震速报信息来源为中国地震台网速报公开数据";
-}*/
-$("#list").css("visibility", "visible");
+}
+
 document.ontouchmove = function (e) {
     e.preventDefault();
 }
@@ -219,11 +238,21 @@ var minInt = 0.0;
 
 var deltatime = 0;
 
+var ifmarker = false;
+var centerpointinfo = new BMapGL.Marker(new BMapGL.Point(107.79942839007867, 37.093496518166944), { icon: centerIcon });
+
 function backcenter() {
     var point = new BMapGL.Point(103.79942839007867, 36.093496518166944);
     //var centerpoint = new BMapGL.Marker(point, { icon: centerIcon });
     //map.addOverlay(centerpoint)
     map.centerAndZoom(new BMapGL.Point(103.79942839007867, 36.093496518166944), 5);
+    if(ifmarker)
+    {
+        map.removeOverlay(centerpointinfo);
+        $("#eewmainBar").css("visibility", "hidden");
+        ifmarker = false;
+    }
+    
 }
 
 window.onresize = function() {
@@ -311,7 +340,9 @@ function sceew() //四川地震局
 
             distance = _open ? getDistance(sc_eewLat, sc_eewLon, localLat, localLon) : 0;
             sc_eewarrivetime = Math.round(distance / 4);
-            if ((currentTimeStamp - sc_eewStartAt) / 1000 <= 60 + sc_eewarrivetime) {
+            if ((currentTimeStamp - sc_eewStartAt) / 1000 <= 60 + sc_eewarrivetime && (currentTimeStamp - sc_eewStartAt) / 1000 >= 0) {
+                if (ifmarker)
+                    backcenter();
                 sc_eewcancel = false;
                 $("#currentTime").css("color", "red");
                 $("#textbox").css("background-color", "red");
@@ -388,6 +419,36 @@ function sceew() //四川地震局
             }
         });
 }
+
+function getinfo(a)
+{
+    if (sc_eewcancel == true)
+    {
+        $.getJSON("https://api.wolfx.jp/cenc_eqlist.json?" + Date.now(), function (json) {
+            if(ifmarker)
+            {
+                map.removeOverlay(centerpointinfo);
+                backcenter();
+                ifmarker = false;
+            }
+            latitudeinfo = eval("json.No" + a + ".latitude");
+            longitudeinfo = eval("json.No" + a + ".longitude");
+            var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
+            centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
+            $("#eewmainBar").css("visibility", "visible");
+            document.getElementById("eewmainTime").innerHTML = eval("json.No" + a + ".time");
+            document.getElementById("eewmainEpicenter").innerHTML = eval("json.No" + a + ".location");
+            document.getElementById("eewmainDepth").innerHTML = Math.round(eval("json.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
+            document.getElementById("eewmainMaxInt").innerHTML = eval("json.No" + a + ".intensity");
+            document.getElementById("eewmainMagnitude").innerHTML = '<font size="4">M</font>' + (Math.round(eval("json.No" + a + ".magnitude") * 100) / 100);
+            map.addOverlay(centerpointinfo);
+            map.centerAndZoom(pointinfo, 10);
+            ifmarker = true;
+        });
+    }
+
+}
+
 function icl() //ICL地震预警网
 {
     $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
@@ -486,7 +547,7 @@ function azooms() {
     else if (!iclcancel) {
         bpoints.push(new BMapGL.Point(iclLon, iclLat));
     }
-    var view = map.getViewport(eval(bpoints));
+    var view = map.getViewport(eval(bpoints));//eval(bpoints)
     var mapZoom = view.zoom;
     var centerPoint = view.center;
     map.centerAndZoom(centerPoint, mapZoom - 1);
