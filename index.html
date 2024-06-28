@@ -157,11 +157,13 @@
 
     var cencmd5 = 0;
     var cenc = new Audio('audio/cenc.mp3');
+    var cencjson = "";
 
     function getData() {
         $.getJSON("https://api.wolfx.jp/cenc_eqlist.json?" + Date.now(), function (json) {
             if(cencmd5 != json.md5)
             {
+                cencjson = json;
                 cenc.play();
                 //music.loop =true;
                 //music.playbackRate = 2;
