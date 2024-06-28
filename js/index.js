@@ -242,10 +242,14 @@ var ifmarker = false;
 var centerpointinfo = new BMapGL.Marker(new BMapGL.Point(107.79942839007867, 37.093496518166944), { icon: centerIcon });
 
 function backcenter() {
-    var point = new BMapGL.Point(103.79942839007867, 36.093496518166944);
+    var cpoints = new Array();
+    cpoints.push(new BMapGL.Point(130, 50));
+    cpoints.push(new BMapGL.Point(75, 25));
+    var cview = map.getViewport(eval(cpoints));
+    var cmapZoom = cview.zoom;
+    //var point = new BMapGL.Point(103.79942839007867, 36.093496518166944);
     //var centerpoint = new BMapGL.Marker(point, { icon: centerIcon });
-    //map.addOverlay(centerpoint)
-    map.centerAndZoom(new BMapGL.Point(103.79942839007867, 36.093496518166944), 5);
+    map.centerAndZoom(cview.center, cmapZoom);
     if(ifmarker)
     {
         map.removeOverlay(centerpointinfo);
@@ -424,27 +428,25 @@ function getinfo(a)
 {
     if (sc_eewcancel == true)
     {
-        $.getJSON("https://api.wolfx.jp/cenc_eqlist.json?" + Date.now(), function (json) {
-            if(ifmarker)
-            {
-                map.removeOverlay(centerpointinfo);
-                backcenter();
-                ifmarker = false;
-            }
-            latitudeinfo = eval("json.No" + a + ".latitude");
-            longitudeinfo = eval("json.No" + a + ".longitude");
-            var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
-            centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
-            $("#eewmainBar").css("visibility", "visible");
-            document.getElementById("eewmainTime").innerHTML = eval("json.No" + a + ".time");
-            document.getElementById("eewmainEpicenter").innerHTML = eval("json.No" + a + ".location");
-            document.getElementById("eewmainDepth").innerHTML = Math.round(eval("json.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
-            document.getElementById("eewmainMaxInt").innerHTML = eval("json.No" + a + ".intensity");
-            document.getElementById("eewmainMagnitude").innerHTML = '<font size="4">M</font>' + (Math.round(eval("json.No" + a + ".magnitude") * 100) / 100);
-            map.addOverlay(centerpointinfo);
-            map.centerAndZoom(pointinfo, 10);
-            ifmarker = true;
-        });
+        if(ifmarker)
+        {
+            map.removeOverlay(centerpointinfo);
+            backcenter();
+            ifmarker = false;
+        }
+        latitudeinfo = eval("cencjson.No" + a + ".latitude");
+        longitudeinfo = eval("cencjson.No" + a + ".longitude");
+        var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
+        centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
+        $("#eewmainBar").css("visibility", "visible");
+        document.getElementById("eewmainTime").innerHTML = eval("cencjson.No" + a + ".time");
+        document.getElementById("eewmainEpicenter").innerHTML = eval("cencjson.No" + a + ".location");
+        document.getElementById("eewmainDepth").innerHTML = Math.round(eval("cencjson.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
+        document.getElementById("eewmainMaxInt").innerHTML = eval("cencjson.No" + a + ".intensity");
+        document.getElementById("eewmainMagnitude").innerHTML = '<font size="4">M</font>' + (Math.round(eval("cencjson.No" + a + ".magnitude") * 100) / 100);
+        map.addOverlay(centerpointinfo);
+        map.centerAndZoom(pointinfo, 10);
+        ifmarker = true;
     }
 
 }
