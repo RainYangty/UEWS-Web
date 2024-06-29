@@ -65,6 +65,7 @@ var three = new Audio('audio/countdown/3.mp3');
 var two = new Audio('audio/countdown/2.mp3');
 var one = new Audio('audio/countdown/1.mp3');
 var arrive = new Audio('audio/countdown/arrive.mp3');
+var custumIcon = new BMapGL.Icon("seis.png", new BMapGL.Size(10, 10));
 
 var map = new BMapGL.Map("allmap");
 map.setMapStyleV2({
@@ -118,7 +119,7 @@ else {
     document.getElementById("form-control-text").innerHTML = getCookie("ln") + "°E";
     document.getElementById("form-control-text2").innerHTML = getCookie("la") + "°N";
     var point = new BMapGL.Point(getCookie("ln"), getCookie("la"));
-    var marker = new BMapGL.Marker(point);        // 创建标注   
+    var marker = new BMapGL.Marker(point, { icon: custumIcon });        // 创建标注   
     map.addOverlay(marker);                     // 将标注添加到地图中
 }
 
@@ -411,7 +412,7 @@ function sceew() //四川地震局
                 map.clearOverlays();
                 drawseis = false;
                 var point = new BMapGL.Point(localLon, localLat);
-                var marker = new BMapGL.Marker(point);        // 创建标注   
+                var marker = new BMapGL.Marker(point, { icon: custumIcon });        // 创建标注   
                 map.addOverlay(marker);                     // 将标注添加到地图中
                 warningtf = false;
                 //window.location.href = 'index.html';
@@ -523,7 +524,7 @@ function icl() //ICL地震预警网
                 map.clearOverlays();
                 drawseis = false;
                 var point = new BMapGL.Point(localLon, localLat);
-                var marker = new BMapGL.Marker(point);        // 创建标注   
+                var marker = new BMapGL.Marker(point, { icon: custumIcon });        // 创建标注   
                 map.addOverlay(marker);                     // 将标注添加到地图中
                 warningtf = false;
             }
