@@ -11,43 +11,17 @@
         src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=webgl&ak=FlbWYf8Htrg9j3SQAokFG7qwBBHWbqXg"></script>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link rel="stylesheet" href="./css/settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
     <title>UEWS</title>
 </head>
 
 <body>
-
-    <!--<div id="loading_Background">
-        <--<div id="loading_Logo">
-        </div>
-        <--<div id="loading_Text">载入中</div>--
-        <--<div class="loader"></div>--
-        <div id="loading_Text2"></div>
-    </div>-->
-
     <div id="allmap"></div>
     <div id="currentTime">2080-01-01 00:00:00</div>
     <div id="latency">NaN ms</div>
-    <div>
-        <!--<iframe src="https://bousai.cn/LocalShindo/index.html" id="bbshindo" frameborder="0"></iframe>-->
-        <button id="myBtn" class = "bu">设置</button>
-        <button id="myBtn2" class = "bu2">居中</button>
-        <form>
-            <div>
-                <label class="form-control-label">经度:</label>
-                <input class="form-control-input" id="1" type="text" name="经度" required>
-                <div class="form-control-text" id="form-control-text"></div>
-            </div>
-            <div class="form-control2">
-                <label class="form-control-label2">纬度:</label>
-                <input class="form-control-input2" id="2" type="text" name="纬度" required>
-                <div class="form-control-text2" id="form-control-text2"></div>
-            </div>
-        </form>
-        <button id="myBtn3" class="bu3">OK</button>
-        <button id="myBtn4" class="bu4">取消</button>
-        <button id="myBtn7" class="bu7">模拟</button>
-    </div>
-    
 
     <div id="textbox">当前无生效中的地震预警</div>
     <div id="warning_textbox">当前无错误</div>
@@ -81,37 +55,35 @@
     </div>
 
     <!--近期地震框-->
-    <div id="list-background">
-        <div id = "seis_type">CENC地震列表</div>
-        <div id = "list">
-            <div id="mainBar" onclick="getinfo(1)">
-                <div id="mainLeft">
-                    <div id="mainTime">01/01 00:00</div>
-                    <div id="mainEpicenter">载入中</div>
-                    <div id="mainDepth">0<font size="3">&nbsp;km</font>
-                    </div>
-                    <div id="mainMagnitude">
-                        <font size="4">M</font>0.0
-                    </div>
+    <div id = "list_type" class = "list_type">ICL历史预警</div>
+    <div id = "list">
+        <div id="mainBar" onclick="getinfo(1)">
+            <div id="mainLeft">
+                <div id="mainTime">01/01 00:00</div>
+                <div id="mainEpicenter">载入中</div>
+                <div id="mainDepth">0<font size="3">&nbsp;km</font>
                 </div>
-                <div id="mainMaxInt">-</div>
-            </div>
-            <div id="subBar2" onclick="getinfo(2)">
-                <div id="subLeft2">
-                    <div id="subTime2">01/01 00:00</div>
-                    <div id="subEpicenter2">载入中</div>
-                    <div id="subMagnitude2">M0.0</div>
+                <div id="mainMagnitude">
+                    <font size="4">M</font>0.0
                 </div>
-                <div id="subMaxInt2">-</div>
             </div>
-            <div id="subBar3" onclick="getinfo(3)">
-                <div id="subLeft3">
-                    <div id="subTime3">01/01 00:00</div>
-                    <div id="subEpicenter3">载入中</div>
-                    <div id="subMagnitude3">M0.0</div>
-                </div>
-                <div id="subMaxInt3">-</div>
+            <div id="mainMaxInt">-</div>
+        </div>
+        <div id="subBar2" onclick="getinfo(2)">
+            <div id="subLeft2">
+                <div id="subTime2">01/01 00:00</div>
+                <div id="subEpicenter2">载入中</div>
+                <div id="subMagnitude2">M0.0</div>
             </div>
+            <div id="subMaxInt2">-</div>
+        </div>
+        <div id="subBar3" onclick="getinfo(3)">
+            <div id="subLeft3">
+                <div id="subTime3">01/01 00:00</div>
+                <div id="subEpicenter3">载入中</div>
+                <div id="subMagnitude3">M0.0</div>
+            </div>
+            <div id="subMaxInt3">-</div>
         </div>
     </div>
 
@@ -140,71 +112,58 @@
             <button id="close-btn" class="close-btn">OK</button>
         </div>
     </section>
+
+    <div class = "navbar">
+        <input type = "checkbox"/>
+        <span></span>
+        <span></span>
+        <ul>
+            <li><a href = "javascript:void(cwarnings())">预警</a></li>
+            <li><a href = "javascript:void(ccenclist())">地震报告</a></li>
+            <li><a href = "javascript:void(backcenter())">居中</a></li>
+            <li><a href = "javascript:void(settings())" id = "settings">设置</a></li>
+        </ul>
+    </div>
+
+    <!--设置界面-->
+    <div class="popup">
+        <header>
+          <span style="color: aliceblue;">设置</span>
+          <div class="close" id = "close"><i class="uil uil-times"></i></div>
+        </header>
+        <div class="content">
+          <p style="color: aliceblue;">经纬度</p>
+          <div class="field">
+            <input type="text"  id="1" value="经度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
+            <p style="color: aliceblue;">°E</p>
+            <input type="text" id="2" value="纬度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
+            <p style="color: aliceblue;">°N</p>
+            <button id="ok" style="color: aliceblue;">OK</button>
+          </div>
+        </div>
+      </div>
+
 </body>
 
 </html>
-<script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/settings.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/variable.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/warning.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/getinfo.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/map.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/updatetar.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/userpage.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/choise.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
     console.log("UDTW \nPowered By RainYang")
-    //console.log(document.cookie)
 
-    //console.log(getCookie("la"))
-
-    for (ii = 4; ii < 50; ii++) {
+    for (ii = 4; ii < 20; ii++) {
         $("#subBar" + Number(ii - 1)).after('<div id="subBar' + ii + '" onclick="getinfo(' + ii + ')"><div id="subLeft' + ii + '"><div id="subTime' + ii + '">01/01 00:00</div><div id="subEpicenter' + ii + '">载入中</div><div id="subMagnitude' + ii + '">M0.0</div></div><div id="subMaxInt' + ii + '">-</div></div>')
     }
 
     var cencmd5 = 0;
     var cenc = new Audio('audio/cenc.mp3');
-    var cencjson = "";
-
-    function getData() {
-        $.getJSON("https://api.wolfx.jp/cenc_eqlist.json?" + Date.now(), function (json) {
-            if(cencmd5 != json.md5)
-            {
-                cencjson = json;
-                cenc.play();
-                //music.loop =true;
-                //music.playbackRate = 2;
-                cencmd5 = json.md5;
-            }
-            mainType = json.No1.type;
-            mainDepth = json.No1.depth;
-            mainEpicenter = json.No1.location;
-            mainStartAt = json.No1.time;
-            mainMagnitude = json.No1.magnitude;
-            mainTime = json.No1.time;
-            //写入数据
-            mainMaxInt = calcMaxInt(mainMagnitude, mainDepth);
-            $("#mainEpicenter").text(mainEpicenter);
-            document.getElementById("mainDepth").innerHTML = mainDepth + '<font size="3">&nbsp;km</font>';
-            document.getElementById("mainMagnitude").innerHTML = '<font size="4">M</font>' + mainMagnitude;
-            $("#mainMaxInt").css("background-color", intColor[mainMaxInt].bkcolor);
-            $("#mainLeft").css("background-color", intColor[mainMaxInt].bkcolor);
-            document.getElementById("mainMaxInt").innerHTML = '<span style="position:relative; top:-2px">' + mainMaxInt + "</span>";
-            if (mainType == "automatic") {
-                mainTime = mainTime + " 自动报";
-            } else {
-                mainTime = mainTime + " 正式报";
-            }
-            $("#mainTime").text(mainTime);
-            for (i = 2; i < 50; i++) {
-                subTime = eval("json.No" + i + ".time");
-                subEpicenter = eval("json.No" + i + ".location");
-                subMagnitude = eval("json.No" + i + ".magnitude");
-                subDepth = eval("json.No" + i + ".depth");
-                subMaxInt = calcMaxInt(subMagnitude, subDepth);
-                calcSubEpicenterFontSize(subEpicenter, i);
-                $("#subTime" + i).text(subTime);
-                $("#subEpicenter" + i).text(subEpicenter);
-                $("#subMagnitude" + i).text("M" + subMagnitude);
-                $("#subMaxInt" + i).text(subMaxInt);
-                $("#subMaxInt" + i).css("background-color", intColor[subMaxInt].bkcolor);
-                $("#subLeft" + i).css("background-color", intColor[subMaxInt].bkcolor);
-            }
-        })
-    }
 
     //subEpicenter 字体大小自适应
     function calcSubEpicenterFontSize(epicenter, locate) {
@@ -215,8 +174,4 @@
             $("#subEpicenter" + locate).css("font-size", "20px")
         }
     }
-
-    //初始化运行函数 & 计时器
-    getData();
-    setInterval(getData, 5000);
 </script>

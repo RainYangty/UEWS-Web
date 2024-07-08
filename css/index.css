@@ -13,6 +13,7 @@
     height: 10em;
 }
 
+
 .loader {
     margin: 10px auto;
     top: 50%;
@@ -67,13 +68,13 @@
 ::-webkit-scrollbar {
     width: 0;
     height: 0;
-    background-color: transparent;
+    background-color: #fb7299;/*transparent;*/
 }
 
 html,
 body {
     font-family: OPPOSans-B, sans-serif;
-    height: calc(100% - 10px);
+    height: 100%;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -130,8 +131,7 @@ body {
     font-size: 24px;
     text-align: center;
     color: aliceblue;
-    border: 3px solid #5e5c5c;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 #warning_textbox {
@@ -157,10 +157,12 @@ body {
     border-color: #242424;
     /*top: 5px;
     left: 5px;*/
-    width: calc(100% - 360px);/*calc(100% - 10px);*/
+    left: 0px;
+    width: 100%;/*calc(100% - 10px);*/
     height: 100%;/*calc(100% - 34px);*/
     float: left;
     border-radius: 10px;
+    z-index: 0;
 }
 
 #seisbox_background {
@@ -380,7 +382,7 @@ body {
     right: 10px;
     color: red;
     font-size: 20px;
-    z-index: 999999;
+    z-index: 100;
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
 }
@@ -391,32 +393,32 @@ body {
     right: 250px;
     color: white;
     font-size: 20px;
-    z-index: 999999;
+    z-index: 100;
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
 }
 
-#list-background {
-    visibility: visible;
+#list_type {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    background-color: #3b3b3b;
+    top: 10px;
+    right: 10px;
     width: 350px;
-    height: calc(100% - 30px);
-    z-index: 9999;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.1);
-    background-color: #4a4949;
-    opacity: 1;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    color: aliceblue;
+    border-radius: 15px;
 }
 
 #list {
     visibility: hidden;
     position: absolute;
-    top: 30px;
+    top: 60px;
     width: 350px;
-    height: calc(100% - 30px);
-    z-index: 9999;
+    right: 10px;
+    height: 305px;
+    z-index: 100;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.1);
     opacity: 1;
@@ -427,7 +429,7 @@ body {
 
 #eewmainBar {
     visibility: hidden;
-    position: relative;
+    position: absolute;
     top: 60px;
     left: 10px;
     height: 98px;
@@ -442,7 +444,7 @@ body {
     height: 98px;
     width: 248px;
     background-color: rgba(51, 51, 51, 0.8);
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 #eewmainMaxInt {
@@ -451,7 +453,7 @@ body {
     width: 98px;
     left: 0px;
     background-color: #444444;
-    border-radius: 10px;
+    border-radius: 20px;
     line-height: 98px;
     font-size: 64px;
     font-family: OPPOSans-H;
@@ -493,8 +495,8 @@ body {
 
 #eewmainBar2 {
     visibility: hidden;
-    position: relative;
-    top: 70px;
+    position: absolute;
+    top: 170px;
     left: 10px;
     height: 98px;
     width: 350px;
@@ -508,7 +510,7 @@ body {
     height: 98px;
     width: 248px;
     background-color: rgba(51, 51, 51, 0.8);
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 #eewmainMaxInt2 {
@@ -517,7 +519,7 @@ body {
     width: 98px;
     left: 0px;
     background-color: #444444;
-    border-radius: 10px;
+    border-radius: 20px;
     line-height: 98px;
     font-size: 64px;
     font-family: OPPOSans-H;
@@ -575,7 +577,7 @@ body {
     height: 98px;
     width: 248px;
     background-color: #333;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 #mainMaxInt {
@@ -584,7 +586,7 @@ body {
     width: 98px;
     right: 0px;
     background-color: #444444;
-    border-radius: 10px;
+    border-radius: 15px;
     line-height: 98px;
     font-size: 74px;
     font-family: OPPOSans-H;
@@ -688,8 +690,8 @@ body {
     position: absolute;
     font-weight: normal;
     bottom: 30px;
-    right: 0px;
-    border-radius: 10px;
+    right: 10px;
+    border-radius: 20px;
     box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.1);
     height: 130px;
     width: 350px;
@@ -704,7 +706,7 @@ body {
 
 #countDown_Run {
     position: absolute;
-    border-radius: 10px;
+    border-radius: 20px;
     z-index: 999999;
     top: 30px;
     height: 100px;
@@ -714,7 +716,7 @@ body {
 
 #countDown_PBorder {
     position: absolute;
-    border-radius: 10px;
+    border-radius: 20px;
     top: 0px;
     left: 100px;
     width: 120px;
@@ -723,7 +725,7 @@ body {
 
 #countDown_SBorder {
     position: absolute;
-    border-radius: 10px;
+    border-radius: 20px;
     top: 0px;
     left: 220px;
     width: 120px;
@@ -799,7 +801,7 @@ body {
     left: 0px;
     top: 0px;
     background-color: #444444;
-    border-radius: 10px;
+    border-radius: 20px;
     line-height: 98px;
     font-size: 64px;
     font-family: OPPOSans-H;
@@ -807,109 +809,6 @@ body {
     /*text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     border: 3px solid white;*/
     box-sizing: border-box;
-}
-
-.bu {
-    position: absolute;
-    width: 60px;
-    height: 25px;
-    color: #f1f1f1;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #8c8c8c;
-    background-color: transparent;
-    transition: border-color 0.2s ease-in-out;
-    background-repeat: no-repeat;
-    background-position: right 2% center;
-    background-size: 2rem 2rem;
-    left: 0px;
-    bottom: 0px;
-    font-weight: bold;
-    font-family: OPPOSans-B, sans-serif;
-    z-index: 99999;
-}
-
-.bu2 {
-    position: absolute;
-    width: 60px;
-    height: 25px;
-    color: #f1f1f1;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #8c8c8c;
-    background-color: transparent;
-    transition: border-color 0.2s ease-in-out;
-    background-repeat: no-repeat;
-    background-position: right 2% center;
-    background-size: 2rem 2rem;
-    left: 70px;
-    bottom: 0px;
-    font-weight: bold;
-    font-family: OPPOSans-B, sans-serif;
-    z-index: 99999;
-}
-
-.bu3 {
-    position: absolute;
-    width: 60px;
-    height: 25px;
-    color: #f1f1f1;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #8c8c8c;
-    background-color: transparent;
-    transition: border-color 0.2s ease-in-out;
-    background-repeat: no-repeat;
-    background-position: right 2% center;
-    background-size: 2rem 2rem;
-    left: 420px;
-    bottom: 0px;
-    font-weight: bold;
-    font-family: OPPOSans-B, sans-serif;
-    visibility: hidden;
-    z-index: 99999;
-}
-
-.bu4 {
-    position: absolute;
-    width: 60px;
-    height: 25px;
-    color: #f1f1f1;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #8c8c8c;
-    background-color: transparent;
-    transition: border-color 0.2s ease-in-out;
-    background-repeat: no-repeat;
-    background-position: right 2% center;
-    background-size: 2rem 2rem;
-    left: 490px;
-    bottom: 0px;
-    font-weight: bold;
-    font-family: OPPOSans-B, sans-serif;
-    visibility: hidden;
-    z-index: 99999;
-}
-
-.bu7 {
-    visibility: hidden;
-    position: absolute;
-    width: 60px;
-    height: 25px;
-    color: #f1f1f1;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #8c8c8c;
-    background-color: transparent;
-    transition: border-color 0.2s ease-in-out;
-    background-repeat: no-repeat;
-    background-position: right 2% center;
-    background-size: 2rem 2rem;
-    right: 350px;
-    bottom: 0px;
-    font-weight: bold;
-    font-family: OPPOSans-B, sans-serif;
-    z-index: 99999;
 }
 
 .form-control-label {
@@ -924,7 +823,7 @@ body {
     bottom: 0px;
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
-    z-index: 99999;
+    z-index: 200;
 }
 
 .form-control-input {
@@ -935,7 +834,7 @@ body {
     display: block;
     border-radius: 20px;
     border: 1px solid #8c8c8c;
-    background-color: transparent;
+    background-color: #fb7299;
     transition: border-color 0.2s ease-in-out;
     background-repeat: no-repeat;
     background-position: right 2% center;
@@ -945,7 +844,7 @@ body {
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
     visibility: hidden;
-    z-index: 99999;
+    z-index: 200;
 }
 .form-control-text {
     position: absolute;
@@ -960,7 +859,7 @@ body {
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
     visibility: visible;
-    z-index: 99999;
+    z-index: 200;
 }
 
 .form-control-label2 {
@@ -975,7 +874,7 @@ body {
     bottom: 0px;
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
-    z-index: 99999;
+    z-index: 200;
 }
 
 .form-control-input2 {
@@ -986,7 +885,7 @@ body {
     display: block;
     border-radius: 20px;
     border: 1px solid #8c8c8c;
-    background-color: transparent;
+    background-color: #fb7299;
     transition: border-color 0.2s ease-in-out;
     background-repeat: no-repeat;
     background-position: right 2% center;
@@ -996,7 +895,7 @@ body {
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
     visibility: hidden;
-    z-index: 99999;
+    z-index: 200;
 }
 
 .form-control-text2 {
@@ -1012,5 +911,102 @@ body {
     font-weight: bold;
     font-family: OPPOSans-B, sans-serif;
     visibility: visible;
-    z-index: 99999;
+    z-index: 200;
+}
+
+/*导航栏*/
+* {
+	/* 页面初始化 清除页面元素原有的内外边距 */
+	padding: 0;
+	margin: 0;
+}
+:root {
+    --main-color: #fb7299;
+}
+body,
+.navbar,
+.navbar ul {
+	/* 三个元素都需要弹性布局 写一块 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.navbar {
+	/* 相对定位 */
+	position: absolute;
+	padding: 20px;
+    left: 10px;
+    height: 15px;
+    bottom: 10px;
+	border-radius: 20px;
+	background-color: #3b3b3b;
+    z-index: 100;
+}
+.navbar input {
+	width: 40px;
+	height: 40px;
+	/* 鼠标移入变小手 */
+	cursor: pointer;
+	/* 不透明度为0 直接变透明 */
+	opacity: 0;
+}
+.navbar span {
+	/* 绝对定位 */
+	position: absolute;
+	left: 25px;
+	/* 现将两条线都放到一起 然后单独设置第二条线的位置 calc方法可以自动计算数值 */
+	top: calc(50% - 10px);
+	width: 30px;
+	height: 4px;
+	border-radius: 15px;
+	background-color: #999;
+	/* 这里在解决一个问题 现在span覆盖着复选框 我们鼠标放到span点不中复选框  写这个属性就能解决这个问题 即便鼠标放到span上点击也能够选中或者未选中复选框*/
+	pointer-events: none;
+	/* 收回来的时候过渡刚好相反 */
+	transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s;
+}
+/* 因为第二条线在navbar这个元素内的第三个位置 所以这里写3 */
+.navbar span:nth-child(3) {
+	top: calc(50% + 6px);
+}
+.navbar ul {
+	width: 0;
+	/* 溢出隐藏 */
+	overflow: hidden;
+	/* 现在这个盒子是扁的 待会解决这个问题 */
+	/* 这个问题出现的原因是 文字被换行显示了 两个汉字竖着排列了 就撑大盒子了 */
+	/* 这个属性可以让文字就在一行排列 不换行 */
+	white-space: nowrap;
+	transition: all 0.5s;
+}
+.navbar ul li {
+	list-style: none;
+	margin: 0 15px;
+}
+.navbar ul li a {
+	/* 取消下划线 */
+	text-decoration: none;
+	font-size: 20px;
+	color: #fff;
+}
+.navbar ul li a:hover {
+	color: var(--main-color);
+}
+/* :checked是当选中的复选框的时候 ~ 是兄弟选择器 查找同一级的ul */
+.navbar input:checked ~ ul {
+	width: 350px;
+}
+.navbar input:checked ~ span:nth-child(2) {
+	top: calc(50% - 2px);
+	transform: rotate(-45deg);
+	background-color: var(--main-color);
+	/* 现在速度太快了 加个过渡 */
+	/* 这是先执行top 然后.3s后执行transform */
+	transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+.navbar input:checked ~ span:nth-child(3) {
+	top: calc(50% - 2px);
+	transform: rotate(45deg);
+	background-color: var(--main-color);
+	transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
 }

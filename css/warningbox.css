@@ -7,12 +7,12 @@
   color: #fff;
   padding: 14px 22px;
   border: none;
-  background: #4070f4;
+  background: #fb7299;
   border-radius: 6px;
   cursor: pointer;
 }
 button:hover {
-  background-color: #265df2;
+  background-color: #fb7299;
 }
 button.show-modal,
 .modal-box {
@@ -31,13 +31,13 @@ button.show-modal,
   max-width: 380px;
   width: 100%;
   padding: 30px 20px;
-  border-radius: 24px;
-  background-color: #242424;
+  border-radius: 20px;
+  background-color: #3b3b3b;
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
   transform: translate(-50%, -50%) scale(1.2);
-  z-index: 99999;
+  z-index: 200;
 }
 section.active .modal-box {
   opacity: 1;
@@ -46,7 +46,7 @@ section.active .modal-box {
 }
 .modal-box i {
   font-size: 70px;
-  color: #4070f4;
+  color: #fb7299;
 }
 .modal-box h2 {
   margin-top: 20px;
