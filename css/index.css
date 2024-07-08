@@ -994,7 +994,7 @@ body,
 }
 /* :checked是当选中的复选框的时候 ~ 是兄弟选择器 查找同一级的ul */
 .navbar input:checked ~ ul {
-	width: 350px;
+	width: 450px;
 }
 .navbar input:checked ~ span:nth-child(2) {
 	top: calc(50% - 2px);

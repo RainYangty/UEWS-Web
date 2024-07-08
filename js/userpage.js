@@ -15,7 +15,7 @@ window.onresize = function() {
 if (getCookie("la") == null) 
 {
     _open = false;
-    document.getElementById("warninginfo").innerHTML = "请在加载完毕后设置当前位置经纬度坐标（仅支持东北半球，请勿输入英文），否则将关闭倒计时功能(将以cookie形式存储在本地)";
+    document.getElementById("warninginfo").innerHTML = "请在加载完毕后左下角打开设置并记录当前位置经纬度坐标（仅支持东北半球，请勿输入英文），否则将关闭倒计时功能(将以cookie形式存储在本地); 若点击\"地震报告\"时无声音，需要点开左下角并选择\"音频修复\"以确保能播放音频(每次打开均需点击一次)";
     section.classList.add("active");
 }
 else 
