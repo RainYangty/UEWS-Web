@@ -59,8 +59,6 @@ function getinfo(a)
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
             centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
             $("#eewmainBar").css("visibility", "visible");
-            if (mouseintopen)
-                $("#mouseInt").css("visibility", "visible");
             document.getElementById("eewmainTime").innerHTML = TimestampToDate(icljson.data[a].startAt);
             document.getElementById("eewmainEpicenter").innerHTML = icljson.data[a].epicenter;
             document.getElementById("eewmainDepth").innerHTML = Math.round(icljson.data[a].depth * 10) / 10 + '<font size="3">&nbsp;km</font>';
@@ -77,8 +75,6 @@ function getinfo(a)
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
             centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
             $("#eewmainBar").css("visibility", "visible");
-            if (mouseintopen)
-                $("#mouseInt").css("visibility", "visible");
             document.getElementById("eewmainTime").innerHTML = eval("cencjson.No" + a + ".time");
             document.getElementById("eewmainEpicenter").innerHTML = eval("cencjson.No" + a + ".location");
             document.getElementById("eewmainDepth").innerHTML = Math.round(eval("cencjson.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
