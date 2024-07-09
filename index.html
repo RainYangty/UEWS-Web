@@ -13,6 +13,7 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <link rel="stylesheet" href="./css/settings.css">
+    <link rel="stylesheet" href="./css/mouseIntbuttom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
     <title>UEWS</title>
@@ -87,6 +88,16 @@
         </div>
     </div>
 
+    <div id="mouseInt">
+        <div id="mouseInt_LocalName">估计烈度</div>
+        <div id="mouseInt_LocalName2">鼠标位置</div>
+        <div id = "mouseInt_list">
+            <div id="mouseInt_Int">-</div>
+            <div id="mouseInt_pos">未移动</div>
+            <div id="mouseInt_lasttime">预警结束</div>
+        </div>
+    </div>
+
     <div id="countDown">
         <div id="countDown_LocalName">本地预估</div>
         <div id="countDown_LocalName2">预计抵达时间</div>
@@ -139,9 +150,16 @@
             <p style="color: aliceblue;">°E</p>
             <input type="text" id="2" value="纬度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
             <p style="color: aliceblue;">°N</p>
-            <button id="ok" style="color: aliceblue;">OK</button>
           </div>
+          
         </div>
+        <div style="display: flex;">
+            <p style="color: aliceblue;">震时鼠标位置烈度显示</p>
+            <input type="checkbox" class="switch" id="mouseintopen">
+        </div>
+        
+        <button id="ok" style="color: aliceblue; float:none;">应用</button>
+        
       </div>
 
 </body>

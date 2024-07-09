@@ -1,4 +1,5 @@
 var drawseis = false;
+var _open = true;
 
 //定义烈度配色
 const intColor = {
@@ -72,3 +73,5 @@ var shake = false;
 var deltatime = 0;
 
 var listtype = "warings";
+
+var mouseintopen = false;

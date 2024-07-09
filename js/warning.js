@@ -13,7 +13,7 @@ var icllastId;
 var iclUpdates;
 var iclmainMaxInt;
 var iclarrivetime;
-
+var iclint0time;
 
 var sc_eewStartAt;
 var sc_eewLat;
@@ -26,6 +26,7 @@ var sc_eewUpdates;
 var sc_eewmainMaxInt;
 var sc_eewlocalname;
 var sc_eewarrivetime;
+var sc_eewint0time;
 
 var minInt = 0.0;
 
@@ -58,6 +59,8 @@ function getinfo(a)
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
             centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
             $("#eewmainBar").css("visibility", "visible");
+            if (mouseintopen)
+                $("#mouseInt").css("visibility", "visible");
             document.getElementById("eewmainTime").innerHTML = TimestampToDate(icljson.data[a].startAt);
             document.getElementById("eewmainEpicenter").innerHTML = icljson.data[a].epicenter;
             document.getElementById("eewmainDepth").innerHTML = Math.round(icljson.data[a].depth * 10) / 10 + '<font size="3">&nbsp;km</font>';
@@ -74,6 +77,8 @@ function getinfo(a)
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
             centerpointinfo = new BMapGL.Marker(pointinfo, { icon: centerIcon });
             $("#eewmainBar").css("visibility", "visible");
+            if (mouseintopen)
+                $("#mouseInt").css("visibility", "visible");
             document.getElementById("eewmainTime").innerHTML = eval("cencjson.No" + a + ".time");
             document.getElementById("eewmainEpicenter").innerHTML = eval("cencjson.No" + a + ".location");
             document.getElementById("eewmainDepth").innerHTML = Math.round(eval("cencjson.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
@@ -108,13 +113,16 @@ function sceew() //四川地震局
 
             distance         = _open ? getDistance(sc_eewLat, sc_eewLon, localLat, localLon) : 0;
             sc_eewarrivetime = Math.round(distance / 4);
-            if ((currentTimeStamp - sc_eewStartAt) / 1000 <= 60 + sc_eewarrivetime && (currentTimeStamp - sc_eewStartAt) / 1000 >= 0) {
+            sc_eewint0time   = calcint0time(sc_eewMagnitude);
+            if ((currentTimeStamp - sc_eewStartAt) / 1000 <= sc_eewint0time && (currentTimeStamp - sc_eewStartAt) / 1000 >= 0) {
                 if (ifmarker)
                     backcenter();
                 sc_eewcancel = false;
                 $("#currentTime").css("color", "red");
                 $("#textbox").css("background-color", "red");
                 $("#eewmainBar").css("visibility", "visible");
+                if (mouseintopen)
+                    $("#mouseInt").css("visibility", "visible");
                 if (iclcancel) {
                     document.getElementById("textbox").innerHTML = "地震预警(四川地震局) 第" + sc_eewUpdates + "报";
                     $("#eewmainBar2").css("visibility", "hidden");
@@ -168,7 +176,7 @@ function sceew() //四川地震局
                 $("#eewmainBar").css("visibility", "hidden");
                 $("#eewmainBar2").css("visibility", "hidden");
                 $("#countDown").css("visibility", "hidden");
-                document.getElementById("seis_type").innerHTML = "本地最近测站";
+                $("#mouseInt").css("visibility", "hidden");
                 //map.removeOverlay(sWave);
                 //map.removeOverlay(pWave);
                 map.clearOverlays();
@@ -191,26 +199,29 @@ function icl() //ICL地震预警网
 {
     $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
         function (json) {
-            iclLat = json.data[0].latitude;
-            icllastId = json.data[0].eventId;
-            iclLon = json.data[0].longitude;
-            iclDepth = json.data[0].depth;
-            iclStartAt = json.data[0].startAt;
-            iclUpdates = json.data[0].updates;
-            iclEpicenter = json.data[0].epicenter;
-            iclMagnitude = json.data[0].magnitude;
-            shake = true;
-            iclMaxInt = calcMaxInt(iclMagnitude, iclDepth);
+            iclLat          = json.data[0].latitude;
+            icllastId       = json.data[0].eventId;
+            iclLon          = json.data[0].longitude;
+            iclDepth        = json.data[0].depth;
+            iclStartAt      = json.data[0].startAt;
+            iclUpdates      = json.data[0].updates;
+            iclEpicenter    = json.data[0].epicenter;
+            iclMagnitude    = json.data[0].magnitude;
+            shake           = true;
+            iclMaxInt       = calcMaxInt(iclMagnitude, iclDepth);
 
-            distance = _open ? getDistance(iclLat, iclLon, localLat, localLon) : 0;
-            iclarrivetime = Math.round(distance / 4);
-            if ((currentTimeStamp - iclStartAt) / 1000 <= 60 + iclarrivetime) {
+            distance        = _open ? getDistance(iclLat, iclLon, localLat, localLon) : 0;
+            iclarrivetime   = Math.round(distance / 4);
+            iclint0time  = calcint0time(iclMagnitude);
+            if ((currentTimeStamp - iclStartAt) / 1000 <= iclint0time) {
                 iclcancel = false;
                 $("#currentTime").css("color", "red");
                 $("#textbox").css("background-color", "red");
                 countDown()
                 //countDown(iclLat, iclLon, iclStartAt, iclMagnitude, iclMaxInt, iclEpicenter);
                 $("#eewmainBar").css("visibility", "visible");
+                if (mouseintopen)
+                    $("#mouseInt").css("visibility", "visible");
                 if (sc_eewcancel) {
                     $("#eewmainBar2").css("visibility", "hidden");
                     document.getElementById("textbox").innerHTML = "地震预警(icl) 第" + iclUpdates + "报";
@@ -252,6 +263,7 @@ function icl() //ICL地震预警网
                 $("#eewmainBar").css("visibility", "hidden");
                 $("#eewmainBar2").css("visibility", "hidden");
                 $("#countDown").css("visibility", "hidden");
+                $("#mouseInt").css("visibility", "hidden");
                 document.getElementById("seis_type").innerHTML = "本地最近测站";
 
                 //map.removeOverlay(sWave);
@@ -276,8 +288,9 @@ var localInt;
 var feel;
 var distance;
 var ty = 0;
+var int0time;
+var Lat, Lon, StartAt, arrivetime, MaxInt, Epicenter, cancel;
 function countDown() {
-    var Lat, Lon, StartAt, arrivetime, MaxInt, Epicenter, cancel;
     if (ty == 1 || ty == 3) {
         Lat = iclLat;
         Lon = iclLon;
@@ -287,6 +300,7 @@ function countDown() {
         Epicenter = iclEpicenter;
         cancel = iclcancel;
         Magnitude = iclMagnitude;
+        int0time = iclint0time;
     }
     else if (ty == 0 || ty == 2) {
         Lat = sc_eewLat;
@@ -297,30 +311,27 @@ function countDown() {
         Epicenter = sc_eewEpicenter;
         cancel = sc_eewcancel;
         Magnitude = sc_eewMagnitude;
+        int0time = sc_eewint0time;
     }
     distance = getDistance(Lat, Lon, localLat, localLon);
     timeMinus = currentTimeStamp - StartAt;
     timeMinusSec = timeMinus / 1000;
     localInt = 0.92 + 1.63 * Magnitude - 3.49 * Math.log10(distance);
 
-    if (timeMinus <= 60000 * 60 + arrivetime * 60000 && _open && !cancel) {//&& localInt >= minInt
+    if (timeMinusSec <= int0time && _open && !cancel) {//&& localInt >= minInt
         $("#countDown").css("visibility", "visible");
         //document.getElementById("seis_type").innerHTML = "震中最近测站";
         //setInterval(countdownRun, 1000, Lat, Lon, OriTime);
         if (!warningtf) {
             if (localInt >= 3.0 && localInt < 5.0) {
                 warningtf = true;
-                if (arrivetime * 60000 - 60000 * 10 - timeMinus >= 60000 * 4) {
-                    var music = new Audio('audio/eew1.mp3');
-                    music.play();
-                }
+                var music = new Audio('audio/eew1.mp3');
+                music.play();
             }
             else if (localInt >= 5.0) {
                 warningtf = true;
-                if (arrivetime * 60000 - 60000 * 10 - timeMinus >= 60000 * 4) {
-                    var music = new Audio('audio/eew2.mp3');
-                    music.play();
-                }
+                var music = new Audio('audio/eew2.mp3');
+                music.play();
             }
             else {
                 warningtf = true;
@@ -352,6 +363,8 @@ function countDown() {
         $("#eewMaxInt").css("background-color", intColor[Math.round(localInt) <= 0 ? 0 : Math.round(localInt)].bkcolor);
         document.getElementById("eewMaxInt").innerHTML = Math.round(localInt) <= 0 ? 0 : Math.round(localInt);
     }
+
+    document.getElementById("mouseInt_lasttime").innerText = "预警结束: " + Math.round(int0time - timeMinusSec) + "s";
 }
 
 var cd = 0;

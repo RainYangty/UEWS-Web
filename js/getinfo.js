@@ -35,6 +35,10 @@ function calcMaxInt(calcMagnitude, calcDepth) {
     return (maxInt);
 }
 
+function calcint0time(calcMagnitude) {
+    return Math.pow(10, (0.92 + 1.63 * calcMagnitude) / 3.49) / 4;
+}
+
 function TimestampToDate(Timestamp) {
     let now = new Date(Timestamp),
         y = now.getFullYear(),
@@ -49,7 +53,6 @@ function DateToTimestamp(_Date) {
 
 function azooms() {
     var bpoints = new Array();
-    bpoints.push(new BMapGL.Point(localLon, localLat));
     if (!sc_eewcancel && !iclcancel) {
         bpoints.push(new BMapGL.Point(sc_eewLon, sc_eewLat));
         bpoints.push(new BMapGL.Point(iclLon, iclLat));
@@ -60,9 +63,20 @@ function azooms() {
     else if (!iclcancel) {
         bpoints.push(new BMapGL.Point(iclLon, iclLat));
     }
-    var view = map.getViewport(eval(bpoints));//eval(bpoints)
-    var mapZoom = view.zoom;
-    var centerPoint = view.center;
+    
+    if (localInt >= 3.0)
+    {
+        bpoints.push(new BMapGL.Point(localLon, localLat));
+        var view = map.getViewport(eval(bpoints));//eval(bpoints)
+        var mapZoom = view.zoom;
+        var centerPoint = view.center;
+    }
+    else
+    {
+        var mapZoom = 10;
+        var view = map.getViewport(eval(bpoints));//eval(bpoints)
+        var centerPoint = view.center;
+    }
     map.centerAndZoom(centerPoint, mapZoom - 1);
 }
 

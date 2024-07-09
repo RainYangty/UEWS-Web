@@ -23,7 +23,9 @@ okk.onclick = ()=>{
         oDate.setDate(oDate.getDate() + 30);
         document.cookie = "la=" + document.getElementById("2").value + ";" + "expires=" + oDate;
         document.cookie = "ln=" + document.getElementById("1").value + ";" + "expires=" + oDate;
+        document.cookie = "mouseintopen=" + document.getElementById("mouseintopen").checked + ";" + "expires=" + oDate;
         console.log("success");
+        console.log(document.getElementById("mouseintopen").checked);
         window.location.href = 'index.html';
     }
 }

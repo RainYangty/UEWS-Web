@@ -11,7 +11,7 @@
   position: absolute;
   left: 50%;
 }
-button{
+#ok{
   outline: none;
   cursor: pointer;
   font-weight: 500;
@@ -169,11 +169,11 @@ header .close:hover{
   outline: none;
   font-size: 15px;
 }
-.field button{
+#ok{
   color: #3b3b3b;
   padding: 5px 18px;
   background: #fb7299;
 }
-.field button:hover{
+#ok:hover{
   background: #fb7299;
 }
