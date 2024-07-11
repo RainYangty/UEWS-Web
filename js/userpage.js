@@ -20,14 +20,28 @@ if (getCookie("la") == null || getCookie("ln") == null || getCookie("mouseintope
 }
 else 
 {
-    document.getElementById("1").value              = getCookie("ln");
-    document.getElementById("2").value              = getCookie("la");
-    mouseintopen                                    = getCookie("mouseintopen") == 'true' ? true : false;
-    document.getElementById("mouseintopen").checked = mouseintopen;
+    document.getElementById("ln").value              = getCookie("ln");
+    document.getElementById("la").value              = getCookie("la");
+    document.getElementById("minint").value          = getCookie("minint") == null ? 3 : getCookie("minint");
+    minint                                           = getCookie("minint") == null ? 3 : getCookie("minint");
+    document.getElementById("delay-serverip").value  = getCookie("delay");
+    delayip                                          = getCookie("delay") == null || getCookie("delay") == '' ? null : getCookie("delay");
+    mouseintopen                                     = getCookie("mouseintopen") == 'true' ? true : false;
+    document.getElementById("mouseintopen").checked  = mouseintopen;
     
     var point = new BMapGL.Point(getCookie("ln"), getCookie("la"));
     var marker = new BMapGL.Marker(point, { icon: custumIcon });        // 创建标注   
     map.addOverlay(marker);                     // 将标注添加到地图中
+    if(delayip != null)
+    {
+        //$("#delay").css("color", "#46BC67");
+        scanserver();
+        setInterval(scanserver, 10000);
+    }
+    else
+    {
+        $("#delay").css("color", "#fa5151");
+    }
 }
 
 if ($(window).width() < 800) 
@@ -89,3 +103,5 @@ function backcenter() {
     }
     
 }
+
+backcenter();

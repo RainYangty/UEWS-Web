@@ -6,6 +6,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/warningbox.css">
+    <link rel="stylesheet" href="./css/navbar.css">
     <link rel="shortcut icon" href="favicon.ico" >
     <script type="text/javascript"
         src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=webgl&ak=FlbWYf8Htrg9j3SQAokFG7qwBBHWbqXg"></script>
@@ -56,7 +57,7 @@
     </div>
 
     <!--近期地震框-->
-    <div id = "list_type" class = "list_type">ICL历史预警</div>
+    <div id = "list_type" class = "list_type">CENC测定列表</div>
     <div id = "list">
         <div id="mainBar" onclick="getinfo(1)">
             <div id="mainLeft">
@@ -129,9 +130,10 @@
         <span></span>
         <span></span>
         <ul>
-            <li><a href = "javascript:void(cwarnings())">预警</a></li>
             <li><a href = "javascript:void(ccenclist())">地震报告</a></li>
+            <li><a href = "javascript:void(cwarnings())">历史预警</a></li>
             <li><a href = "javascript:void(backcenter())">居中</a></li>
+            <li><a href = "javascript:void(delayweb())" id = "delay">延迟测定</a></li>
             <li><a href = "javascript:void(definemu())">音频修复</a></li>
             <li><a href = "javascript:void(settings())" id = "settings">设置</a></li>
         </ul>
@@ -143,19 +145,33 @@
           <span style="color: aliceblue;">设置</span>
           <div class="close" id = "close"><i class="uil uil-times"></i></div>
         </header>
-        <div class="content">
-          <p style="color: aliceblue;">经纬度</p>
-          <div class="field">
-            <input type="text"  id="1" value="经度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
-            <p style="color: aliceblue;">°E</p>
-            <input type="text" id="2" value="纬度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
-            <p style="color: aliceblue;">°N</p>
-          </div>
-          
-        </div>
-        <div style="display: flex;">
-            <p style="color: aliceblue;">震时鼠标位置烈度显示</p>
-            <input type="checkbox" class="switch" id="mouseintopen">
+        <div id = "settinglist">
+            <div class="content">
+                <p style="color: aliceblue;">经纬度</p>
+                <div class="field">
+                  <input type="text" id="ln" value="经度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
+                  <p style="color: aliceblue;">°E</p>
+                  <input type="text" id="la" value="纬度" style="background-color: #3b3b3b; color: aliceblue; width: 80px;">
+                  <p style="color: aliceblue;">°N</p>
+                </div>
+            </div>
+            <div class="content">
+                <p style="color: aliceblue;">预警烈度阈值(保留一位小数, 向下取整)</p>
+                <div class="field">
+                    <input type="text" id="minint" value="3.0" style="background-color: #3b3b3b; color: aliceblue;">
+                </div>
+                <p style="color: aliceblue;">*若低于阈值则不会播报, 推荐值: 3.0</p>
+            </div>
+            <div style="display: flex;">
+                <p style="color: aliceblue;">震时鼠标位置烈度显示</p>
+                <input type="checkbox" class="switch" id="mouseintopen">
+            </div>
+            <div class="content">
+                <p style="color: aliceblue;">UEWS-Delay服务器地址(没有留空) <br>例: http://127.0.0.1</p>
+                <div class="field">
+                  <input type="text" id="delay-serverip" style="background-color: #3b3b3b; color: aliceblue;">
+                </div>
+            </div>
         </div>
         
         <button id="ok" style="color: aliceblue; float:none;">应用</button>
@@ -171,9 +187,9 @@
 <script src="./js/getinfo.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/map.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/updatetar.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/userpage.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/choise.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/userpage.js" type="text/javascript" charset="utf-8"></script>
 <script>
     console.log("UDTW \nPowered By RainYang")
 
@@ -191,6 +207,7 @@
             $("#subEpicenter" + locate).css("top", "4px");
         } else {
             $("#subEpicenter" + locate).css("font-size", "20px")
+            $("#subEpicenter" + locate).css("top", "0px");
         }
     }
 </script>

@@ -43,6 +43,17 @@ function settime() //同步时间
     document.getElementById("currentTime").innerHTML = TimestampToDate(Date.parse(new Date()) + deltatime);
 }
 
+function scanserver()
+{
+    delayconnect = false;
+    $("#delay").css("color", "#fa5151");
+    $.getJSON(delayip + "/static/switch.json?" + Date.now(),function (json) {
+        $("#delay").css("color", "#46BC67");
+        delayconnect = true;
+    });
+    
+}
+
 //计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度算法参考:https://github.com/CRooi/CEIV-1.0.0 598-691行
 /* function getDistance(lat1, lng1, lat2, lng2) {
     var radLat1 = Rad(lat1);
@@ -56,7 +67,7 @@ function settime() //同步时间
     return s;
 } */
 
-backcenter();
+//backcenter();
 getData();
 setInterval(sceew, 2000);
 setInterval(icl, 2000);

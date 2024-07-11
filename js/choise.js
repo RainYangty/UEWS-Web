@@ -34,3 +34,16 @@ function definemu()
     var cenc = new Audio('audio/cenc.mp3');
     cenc.play();
 }
+
+function delayweb()
+{
+    if(delayip == null || delayconnect == false)
+    {
+        document.getElementById("warninginfo").innerHTML = "无法连接服务器，这可能是由于未设置UEWS-Dely服务器或服务器离线";
+        section.classList.add("active");
+    }
+    else
+    {
+        window.location.href = delayip;
+    }
+}

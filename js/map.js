@@ -11,8 +11,11 @@ map.addEventListener("mousemove",function(e){
     document.getElementById("mouseInt_pos").innerText = "经度: " + Math.round(e.latlng.lng * 100) / 100 + "°E \n纬度: " + Math.round(e.latlng.lat * 100) / 100 + "°N \n";
     if (!cancel)
     {
-        var mouseInt = 0.92 + 1.63 * Magnitude - 3.49 * Math.log10(getDistance(Lat, Lon, e.latlng.lat, e.latlng.lng));
-        document.getElementById("mouseInt_Int").innerHTML = Math.round(mouseInt) <= 0 ? 0 : Math.round(mouseInt);
+        try
+        {
+            var mouseInt = 0.92 + 1.63 * Magnitude - 3.49 * Math.log10(getDistance(Lat, Lon, e.latlng.lat, e.latlng.lng));
+            document.getElementById("mouseInt_Int").innerHTML = Math.round(mouseInt) <= 0 ? 0 : Math.round(mouseInt);
+        }catch{}
     }
 });
 

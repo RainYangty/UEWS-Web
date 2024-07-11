@@ -72,6 +72,9 @@ var shake = false;
 
 var deltatime = 0;
 
-var listtype = "warings";
+var listtype = "cenc";
 
 var mouseintopen = false;
+var delayip = null;
+var delayconnect = false;
+var minint = 3;

@@ -28,9 +28,6 @@ var sc_eewlocalname;
 var sc_eewarrivetime;
 var sc_eewint0time;
 
-var minInt = 0.0;
-
-
 var ifmarker = false;
 var centerpointinfo = new BMapGL.Marker(new BMapGL.Point(107.79942839007867, 37.093496518166944), { icon: centerIcon });
 
@@ -313,12 +310,11 @@ function countDown() {
     timeMinus = currentTimeStamp - StartAt;
     timeMinusSec = timeMinus / 1000;
     localInt = 0.92 + 1.63 * Magnitude - 3.49 * Math.log10(distance);
-
-    if (timeMinusSec <= int0time && _open && !cancel) {//&& localInt >= minInt
+    if (timeMinusSec <= int0time && _open && !cancel) {
         $("#countDown").css("visibility", "visible");
         //document.getElementById("seis_type").innerHTML = "震中最近测站";
         //setInterval(countdownRun, 1000, Lat, Lon, OriTime);
-        if (!warningtf) {
+        if (!warningtf && localInt >= minint) {
             if (localInt >= 3.0 && localInt < 5.0) {
                 warningtf = true;
                 var music = new Audio('audio/eew1.mp3');
@@ -367,7 +363,7 @@ var cd = 0;
 var cdp = 0;
 
 function countdownAudio() {
-    if (warningtf && localInt >= 3.0) {
+    if (warningtf && localInt >= minint) {
         if (cd == 61) {
             sixty.play();
         }
