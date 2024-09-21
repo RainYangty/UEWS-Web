@@ -106,10 +106,10 @@ function getData() {
             document.getElementById("mainMaxInt").innerHTML = '<span style="position:relative; top:-2px">' + mainMaxInt + "</span>";
             $("#mainTime").text(mainStartAt);
             for (i = 2; i < 20; i++) {
-                subTime = TimestampToDate(json.data[i].startAt);
+                subTime = TimestampToDate(json.data[i - 1].startAt);
                 subEpicenter = json.data[i].epicenter;
-                subMagnitude = Math.round(json.data[i].magnitude * 10) / 10;
-                subDepth = json.data[i].depth;
+                subMagnitude = Math.round(json.data[i - 1].magnitude * 10) / 10;
+                subDepth = json.data[i - 1].depth;
                 subMaxInt = calcMaxInt(subMagnitude, subDepth);
                 calcSubEpicenterFontSize(subEpicenter, i);
                 $("#subTime" + i).text(subTime);
