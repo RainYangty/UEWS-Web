@@ -134,6 +134,21 @@ body {
     border-radius: 15px;
 }
 
+#epidis {
+    position: absolute;
+    /* background-color: #3b3b3b; */
+    background-color: rgba(51, 51, 51, 0.8);
+    top: 170px;
+    left: 10px;
+    width: 350px;
+    height: 40px;
+    font-size: 24px;
+    /* text-align: center; */
+    color: aliceblue;
+    border-radius: 15px;
+    visibility: hidden;
+}
+
 #warning_textbox {
     position: absolute;
     background-color: #3b3b3b;

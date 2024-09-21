@@ -99,6 +99,7 @@ function backcenter() {
     {
         map.removeOverlay(centerpointinfo);
         $("#eewmainBar").css("visibility", "hidden");
+        $("#epidis").css("visibility", "hidden");
         ifmarker = false;
     }
     

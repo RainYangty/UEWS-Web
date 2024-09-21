@@ -51,6 +51,7 @@ function getinfo(a)
         }
         if(listtype == "warings")
         {
+            a -= 1;
             latitudeinfo = icljson.data[a].latitude;
             longitudeinfo = icljson.data[a].longitude;
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
@@ -59,6 +60,11 @@ function getinfo(a)
             document.getElementById("eewmainTime").innerHTML = TimestampToDate(icljson.data[a].startAt);
             document.getElementById("eewmainEpicenter").innerHTML = icljson.data[a].epicenter;
             document.getElementById("eewmainDepth").innerHTML = Math.round(icljson.data[a].depth * 10) / 10 + '<font size="3">&nbsp;km</font>';
+            if(_open)
+            {
+                document.getElementById("epidis1").innerHTML = Math.round(getDistance(latitudeinfo, longitudeinfo, localLat, localLon) * 100) / 100 + '<font size="3">&nbsp;km</font>';
+                $("#epidis").css("visibility", "visible");
+            }
             document.getElementById("eewmainMaxInt").innerHTML = calcMaxInt(Math.round(icljson.data[a].magnitude * 10) / 10, Math.round(icljson.data[a].depth * 10) / 10);
             document.getElementById("eewmainMagnitude").innerHTML = '<font size="4">M</font>' + Math.round(icljson.data[0].magnitude * 10) / 10;
             map.addOverlay(centerpointinfo);
@@ -75,6 +81,11 @@ function getinfo(a)
             document.getElementById("eewmainTime").innerHTML = eval("cencjson.No" + a + ".time");
             document.getElementById("eewmainEpicenter").innerHTML = eval("cencjson.No" + a + ".location");
             document.getElementById("eewmainDepth").innerHTML = Math.round(eval("cencjson.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
+            if(_open)
+            {
+                document.getElementById("epidis1").innerHTML = Math.round(getDistance(latitudeinfo, longitudeinfo, localLat, localLon) * 100) / 100 + '<font size="3">&nbsp;km</font>';
+                $("#epidis").css("visibility", "visible");
+            }
             document.getElementById("eewmainMaxInt").innerHTML = eval("cencjson.No" + a + ".intensity");
             document.getElementById("eewmainMagnitude").innerHTML = '<font size="4">M</font>' + (Math.round(eval("cencjson.No" + a + ".magnitude") * 100) / 100);
             map.addOverlay(centerpointinfo);
