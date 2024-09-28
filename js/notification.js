@@ -1,3 +1,14 @@
+if ('Notification' in window)
+    Notification.requestPermission().then(function(result) {
+        if (result === 'denied') {
+            sendMsg("请打开系统通知权限以及时收到预警信息喵", -1);
+            return;
+        }
+        sendMsg("系统通知权限已打开惹喵", 10000);
+    });
+else
+    sendMsg("本设备不支持通知喵", -1);
+
 function sendNotification(title, body, icon, callback) {
     // 先检查浏览器是否支持
     if (!('Notification' in window)) {
