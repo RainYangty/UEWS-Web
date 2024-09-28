@@ -82,6 +82,8 @@ UEWS 目前并不稳定、完善, 随时可能崩溃, 若遇到问题, 欢迎提
 
 1. 新增通知功能
 2. 修改部分提示显示逻辑
+3. 通知功能导致部分设备无法加载问题修复
+
 
 ## 协议
 本仓库代码依据[GPL-3.0 license](https://github.com/RainYangty/UEWS-Web/blob/main/LICENSE)协议开源
