@@ -11,7 +11,11 @@ window.onresize = function() {
     }, 100);
 };  
 
-
+if (window.location.host != "uews.rainyangty.top")
+{
+    sendMsg("我们强烈建议您访问uews.rainyangty.top来获取地震情报，因为其服务器位于国内", 60000);
+}
+    
 if (getCookie("la") == null || getCookie("ln") == null || getCookie("mouseintopen") == null) 
 {
     _open = false;
@@ -51,7 +55,7 @@ if ($(window).width() < 800)
     section.classList.add("active");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + " <br>网页显示异常，请尝试调大网页宽度或高度" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据以及icl相关数据，地震速报信息来源为中国地震台网速报公开数据";
 }
-else if ($(window).width() < 360 || $(window).height() < 160) 
+/* else if ($(window).width() < 360 || $(window).height() < 160) 
 {
     document.getElementById("warninginfo").innerHTML = "网页显示异常，请尝试调大网页宽度或高度";
 
@@ -80,7 +84,9 @@ else
     $("#list-background").css("visibility", "visible");
     $("#list").css("visibility", "visible");
     //document.getElementById("loading_Text2").innerHTML = "Unoffical Earthquake Warning System" + " <br>提示：首次使用或长时间未使用时，加载时间可能会较长，请确保您的系统时间准确" + "<br>免责申明：本网站不会自行对众发布地震预警/地震速报信息。其地震预警信息来源为四川地震局公开的“紧急地震信息”地震预警数据，地震速报信息来源为中国地震台网速报公开数据";
-}
+} */
+$("#list-background").css("visibility", "visible");
+$("#list").css("visibility", "visible");
 
 document.ontouchmove = function (e) {
     e.preventDefault();

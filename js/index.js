@@ -13,6 +13,14 @@ setTimeout(function () {
 var localLat = getCookie("la");
 var localLon = getCookie("ln");
 
+Notification.requestPermission().then(function(result) {
+    if (result === 'denied') {
+        sendMsg("请打开系统通知权限以及时收到预警信息喵", -1);
+        return;
+    }
+    sendMsg("系统通知权限已打开惹喵", 10000);
+});
+
 function getcurrenttime() //同步时间
 {
     var start = Date.now();

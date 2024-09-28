@@ -1,0 +1,31 @@
+.warning {
+    color: #ffa502;
+}
+
+.error {
+    color: #ff4757;
+}
+
+.success {
+    color: #2ed573;
+}
+
+.msgs {
+    position: absolute;
+    bottom: 18px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    z-index: 200;
+}
+
+.msgs .msg {
+    margin: 8px;
+    padding: 1rem;
+    font: sans-serif;
+    color: aliceblue;
+    background-color: rgba(51, 51, 51, 0.8);
+    border-radius: 0.5rem;
+
+}

@@ -78,5 +78,10 @@ UEWS 目前并不稳定、完善, 随时可能崩溃, 若遇到问题, 欢迎提
 1. 修复历史预警栏信息缺失问题
 2. 新增震中距显示喵!
 
+### 2024-09-28
+
+1. 新增通知功能
+2. 修改部分提示显示逻辑
+
 ## 协议
 本仓库代码依据[GPL-3.0 license](https://github.com/RainYangty/UEWS-Web/blob/main/LICENSE)协议开源

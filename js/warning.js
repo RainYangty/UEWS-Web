@@ -38,19 +38,14 @@ var sc_eewcancel = true;
 
 var warningtf = false;
 
-
-function getinfo(a)
-{
-    if (sc_eewcancel == true)
-    {
-        if(ifmarker)
-        {
+function getinfo(a) {
+    if (sc_eewcancel == true) {
+        if (ifmarker) {
             map.removeOverlay(centerpointinfo);
             backcenter();
             ifmarker = false;
         }
-        if(listtype == "warings")
-        {
+        if (listtype == "warings") {
             a -= 1;
             latitudeinfo = icljson.data[a].latitude;
             longitudeinfo = icljson.data[a].longitude;
@@ -60,8 +55,7 @@ function getinfo(a)
             document.getElementById("eewmainTime").innerHTML = TimestampToDate(icljson.data[a].startAt);
             document.getElementById("eewmainEpicenter").innerHTML = icljson.data[a].epicenter;
             document.getElementById("eewmainDepth").innerHTML = Math.round(icljson.data[a].depth * 10) / 10 + '<font size="3">&nbsp;km</font>';
-            if(_open)
-            {
+            if (_open) {
                 document.getElementById("epidis1").innerHTML = Math.round(getDistance(latitudeinfo, longitudeinfo, localLat, localLon) * 100) / 100 + '<font size="3">&nbsp;km</font>';
                 $("#epidis").css("visibility", "visible");
             }
@@ -71,8 +65,7 @@ function getinfo(a)
             map.centerAndZoom(pointinfo, 10);
             ifmarker = true;
         }
-        else
-        {
+        else {
             latitudeinfo = eval("cencjson.No" + a + ".latitude");
             longitudeinfo = eval("cencjson.No" + a + ".longitude");
             var pointinfo = new BMapGL.Point(longitudeinfo, latitudeinfo);
@@ -81,8 +74,7 @@ function getinfo(a)
             document.getElementById("eewmainTime").innerHTML = eval("cencjson.No" + a + ".time");
             document.getElementById("eewmainEpicenter").innerHTML = eval("cencjson.No" + a + ".location");
             document.getElementById("eewmainDepth").innerHTML = Math.round(eval("cencjson.No" + a + ".depth") * 10) / 10 + '<font size="3">&nbsp;km</font>';
-            if(_open)
-            {
+            if (_open) {
                 document.getElementById("epidis1").innerHTML = Math.round(getDistance(latitudeinfo, longitudeinfo, localLat, localLon) * 100) / 100 + '<font size="3">&nbsp;km</font>';
                 $("#epidis").css("visibility", "visible");
             }
@@ -92,7 +84,7 @@ function getinfo(a)
             map.centerAndZoom(pointinfo, 10);
             ifmarker = true;
         }
-        
+
     }
 
 }
@@ -102,23 +94,31 @@ function sceew() //四川地震局
     var starttime = Date.now();
     $.getJSON("https://api.wolfx.jp/sc_eew.json?" + Date.now(),//https://api.wolfx.jp/sc_eew.json
         function (json) {
-            var endtime      = Date.now();
+            var endtime = Date.now();
             document.getElementById("latency").innerHTML = (endtime - starttime) + "ms";
-            sc_eewLat        = json.Latitude;
-            sc_eewLon        = json.Longitude;
-            sc_eewDepth      = json.Depth;
-            sc_eewStartAt    = Date.parse(new Date(json.OriginTime).toString());
-            sc_eewUpdates    = json.ReportNum;
-            sc_eewEpicenter  = json.HypoCenter;
-            sc_eewMagnitude  = json.Magunitude;
-            sc_eewlocalname  = json.HypoCenter;
+            sc_eewLat = json.Latitude;
+            sc_eewLon = json.Longitude;
+            sc_eewDepth = json.Depth;
+            sc_eewStartAt = Date.parse(new Date(json.OriginTime).toString());
+            sc_eewUpdates = json.ReportNum;
+            sc_eewEpicenter = json.HypoCenter;
+            sc_eewMagnitude = json.Magunitude;
+            sc_eewlocalname = json.HypoCenter;
 
-            sc_eewMaxInt     = calcMaxInt(sc_eewMagnitude, sc_eewDepth);
+            sc_eewMaxInt = calcMaxInt(sc_eewMagnitude, sc_eewDepth);
 
-            distance         = _open ? getDistance(sc_eewLat, sc_eewLon, localLat, localLon) : 0;
+            distance = _open ? getDistance(sc_eewLat, sc_eewLon, localLat, localLon) : 0;
             sc_eewarrivetime = Math.round(distance / 4);
-            sc_eewint0time   = calcint0time(sc_eewMagnitude);
+            sc_eewint0time = calcint0time(sc_eewMagnitude);
             if ((currentTimeStamp - sc_eewStartAt) / 1000 <= sc_eewint0time && (currentTimeStamp - sc_eewStartAt) / 1000 >= 0) {
+                localInt = 0.92 + 1.63 * sc_eewMagnitude - 3.49 * Math.log10(distance);
+                if (localInt >= minint)
+                {
+                    if (sc_eewarrivetime - ((currentTimeStamp - sc_eewStartAt) / 1000) <= 0)
+                        sendNotification("地震预警(四川地震局) 第" + sc_eewUpdates + "报", "本地烈度达预警阈值, 已抵达, 注意避险!"); //发布通知
+                    else
+                        sendNotification("地震预警(四川地震局) 第" + sc_eewUpdates + "报", "本地烈度达预警阈值," + Math.round(sc_eewarrivetime - ((currentTimeStamp - sc_eewStartAt) / 1000)) + "s 后抵达, 注意避险!");
+                }
                 if (ifmarker)
                     backcenter();
                 sc_eewcancel = false;
@@ -203,21 +203,30 @@ function icl() //ICL地震预警网
 {
     $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
         function (json) {
-            iclLat          = json.data[0].latitude;
-            icllastId       = json.data[0].eventId;
-            iclLon          = json.data[0].longitude;
-            iclDepth        = json.data[0].depth;
-            iclStartAt      = json.data[0].startAt;
-            iclUpdates      = json.data[0].updates;
-            iclEpicenter    = json.data[0].epicenter;
-            iclMagnitude    = json.data[0].magnitude;
-            shake           = true;
-            iclMaxInt       = calcMaxInt(iclMagnitude, iclDepth);
+            iclLat = json.data[0].latitude;
+            icllastId = json.data[0].eventId;
+            iclLon = json.data[0].longitude;
+            iclDepth = json.data[0].depth;
+            iclStartAt = json.data[0].startAt;
+            iclUpdates = json.data[0].updates;
+            iclEpicenter = json.data[0].epicenter;
+            iclMagnitude = json.data[0].magnitude;
+            shake = true;
+            iclMaxInt = calcMaxInt(iclMagnitude, iclDepth);
 
-            distance        = _open ? getDistance(iclLat, iclLon, localLat, localLon) : 0;
-            iclarrivetime   = Math.round(distance / 4);
-            iclint0time  = calcint0time(iclMagnitude);
+            distance = _open ? getDistance(iclLat, iclLon, localLat, localLon) : 0;
+            iclarrivetime = Math.round(distance / 4);
+            iclint0time = calcint0time(iclMagnitude);
             if ((currentTimeStamp - iclStartAt) / 1000 <= iclint0time) {
+                localInt = 0.92 + 1.63 * iclMagnitude - 3.49 * Math.log10(distance);
+                if (localInt >= minint)
+                {
+                    if(iclarrivetime - (currentTimeStamp - iclStartAt) <= 0)
+                        sendNotification("地震预警(icl) 第" + iclUpdates + "报", "本地烈度达预警阈值, 已抵达, 注意避险!"); //发布通知
+                    else
+                        sendNotification("地震预警(icl) 第" + iclUpdates + "报", "本地烈度达预警阈值, " + Math.round(iclarrivetime - (currentTimeStamp - iclStartAt) / 1000) + "s 后抵达, 注意避险!"); //发布通知
+                }
+                    
                 iclcancel = false;
                 $("#currentTime").css("color", "red");
                 $("#textbox").css("background-color", "red");
