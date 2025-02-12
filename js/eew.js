@@ -1,5 +1,5 @@
 const msgsDom = document.querySelector(".msgs");
-function sendMsg(msg, duration)
+function showeew(Time, Epicenter, Depth, Magnitude, MaxInt)
 {
     const newMsgDom = document.createElement("div");
     newMsgDom.innerText = msg;
@@ -11,4 +11,3 @@ function sendMsg(msg, duration)
             newMsgDom.remove();
         }, duration);
 }
-sendMsg("Unofficial Earthquake Warning (Monitoring) System | 非官方地震预警系统(内部测试)", -1);

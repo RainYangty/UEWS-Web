@@ -29,7 +29,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
 
 //计算sub最大烈度
 function calcMaxInt(calcMagnitude, calcDepth) {
-    let numa = 1.65 * calcMagnitude;
+    let numa = 1.65 * calcMagnitude;    
     let numb = calcDepth < 10 ? 1.21 * Math.log10(10) : 1.21 * Math.log10(calcDepth);
     let maxInt = Math.round(numa / numb) < 12 ? Math.round(numa / numb) : 12.0;
     return (maxInt);

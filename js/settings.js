@@ -24,10 +24,10 @@ okk.onclick = ()=>{
         document.cookie = "la=" + document.getElementById("la").value + ";" + "expires=" + oDate;
         document.cookie = "ln=" + document.getElementById("ln").value + ";" + "expires=" + oDate;
         document.cookie = "minint=" + Math.round(document.getElementById("minint").value * 10) / 10 + ";" + "expires=" + oDate;
-        document.cookie = "mouseintopen=" + document.getElementById("mouseintopen").checked + ";" + "expires=" + oDate;
+        document.cookie = "devopen=" + document.getElementById("devopen").checked + ";" + "expires=" + oDate;
         document.cookie = "delay=" + document.getElementById("delay-serverip").value + ";" + "expires=" + oDate;
         console.log("success");
-        console.log(document.getElementById("mouseintopen").checked);
+        console.log(document.getElementById("devopen").checked);
         window.location.href = 'index.html';
     }
 }

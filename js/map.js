@@ -14,6 +14,7 @@ map.addEventListener("mousemove",function(e){
         try
         {
             var mouseInt = 0.92 + 1.63 * Magnitude - 3.49 * Math.log10(getDistance(Lat, Lon, e.latlng.lat, e.latlng.lng));
+            mouseInt = mouseInt >= 12 ? 12 : mouseInt
             document.getElementById("mouseInt_Int").innerHTML = Math.round(mouseInt) <= 0 ? 0 : Math.round(mouseInt);
         }catch{}
     }

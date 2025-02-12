@@ -125,8 +125,7 @@ function sceew() //四川地震局
                 $("#currentTime").css("color", "red");
                 $("#textbox").css("background-color", "red");
                 $("#eewmainBar").css("visibility", "visible");
-                if (mouseintopen)
-                    $("#mouseInt").css("visibility", "visible");
+                $("#mouseInt").css("visibility", "visible");
                 if (iclcancel) {
                     document.getElementById("textbox").innerHTML = "地震预警(四川地震局) 第" + sc_eewUpdates + "报";
                     $("#eewmainBar2").css("visibility", "hidden");
@@ -199,6 +198,31 @@ function sceew() //四川地震局
         });
 }
 
+function nsspe() //Voronoi
+{
+    $.getJSON("http://154.37.214.206:5000/json?" + Date.now(), //http://154.37.214.206:5000/json?
+        function (json) {
+            nsspeLat = json.lat;
+            nsspeLon = json.lon;
+            nsspeStartAt = Date.parse(new Date(json.time).toString());
+            if ((currentTimeStamp - nsspeStartAt) / 1000 <= 60 && (currentTimeStamp - nsspeStartAt) / 1000 >= 0 && devopen) {
+                localInt = 0.92 + 1.63 * sc_eewMagnitude - 3.49 * Math.log10(distance);
+                if (ifmarker)
+                    backcenter();
+                $("#nsspemainBar").css("visibility", "visible");
+                $("#currentTime").css("color", "red");
+
+                document.getElementById("nsspemainTime").innerHTML = TimestampToDate(nsspeStartAt);
+                
+                // document.getElementById("eewmainMaxInt").innerHTML = sc_eewMaxInt;
+                map.centerAndZoom(new BMapGL.Point(nsspeLon, nsspeLat), 9);
+                var point = new BMapGL.Point(nsspeLon, nsspeLat);
+                var centerpoint = new BMapGL.Marker(point, { icon: centerIcon });
+                map.addOverlay(centerpoint);
+            }
+        });
+}
+
 function icl() //ICL地震预警网
 {
     $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
@@ -233,8 +257,7 @@ function icl() //ICL地震预警网
                 countDown()
                 //countDown(iclLat, iclLon, iclStartAt, iclMagnitude, iclMaxInt, iclEpicenter);
                 $("#eewmainBar").css("visibility", "visible");
-                if (mouseintopen)
-                    $("#mouseInt").css("visibility", "visible");
+                $("#mouseInt").css("visibility", "visible");
                 if (sc_eewcancel) {
                     $("#eewmainBar2").css("visibility", "hidden");
                     document.getElementById("textbox").innerHTML = "地震预警(icl) 第" + iclUpdates + "报";
@@ -334,15 +357,15 @@ function countDown() {
         $("#countDown").css("visibility", "visible");
         //document.getElementById("seis_type").innerHTML = "震中最近测站";
         //setInterval(countdownRun, 1000, Lat, Lon, OriTime);
-        if (!warningtf && localInt >= minint) {
+        if (!warningtf) {
             if (localInt >= 3.0 && localInt < 5.0) {
                 warningtf = true;
-                var music = new Audio('audio/eew1.mp3');
+                var music = new Audio('audio/eew0.mp3');
                 music.play();
             }
             else if (localInt >= 5.0) {
                 warningtf = true;
-                var music = new Audio('audio/eew2.mp3');
+                var music = new Audio('audio/eew0.mp3');
                 music.play();
             }
             else {

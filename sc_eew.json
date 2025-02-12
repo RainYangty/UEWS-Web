@@ -3,11 +3,11 @@
     "EventID": "20240101070418.0001_1",
     "ReportTime": "2024-02-22 15:12:27",
     "ReportNum": 1,
-    "OriginTime": "2024-09-28 12:21:00",
+    "OriginTime": "2025-02-11 12:32:50",
     "HypoCenter": "测试报(请勿惊慌)",
     "Latitude": 30.67,
-    "Longitude": 110.13,
-    "Magunitude": 9,
+    "Longitude": 117.13,
+    "Magunitude": 4,
     "Depth": 1.14514,
     "MaxIntensity": 4.7
 }

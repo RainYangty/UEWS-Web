@@ -71,6 +71,7 @@ function scanserver()
 getData();
 setInterval(sceew, 2000);
 setInterval(icl, 2000);
+setInterval(nsspe, 2000);
 setInterval(drawwave, 500);
 setInterval(settime, 1000);
 setInterval(countdownAudio, 1000);

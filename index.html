@@ -16,9 +16,18 @@
 
     <link rel="stylesheet" href="./css/settings.css">
     <link rel="stylesheet" href="./css/mouseIntbuttom.css">
+    <link rel="stylesheet" href="./css/nsspe.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
-    <title>UEWS</title>
+    <title>Unofficial Earthquake Warning (Monitoring) System | 非官方地震预警系统</title>
+    <py-config>
+        packages = [
+        "numpy",
+        "scipy",
+        "shapely",
+        "requests",
+        ]
+    </py-config>
 </head>
 
 <body>
@@ -29,17 +38,29 @@
     <div id="textbox">当前无生效中的地震预警</div>
     <div id="warning_textbox">当前无错误</div>
     
-    <!--地震预警框icl\sceew-->
-    <div id="eewmainBar">
-        <div id="eewmainRight">
-            <div id="eewmainTime">01/01 00:00</div>
-            <div id="eewmainEpicenter">载入中</div>
-            <div id="eewmainDepth">0<font size="3">&nbsp;km</font></div>
-            <div id="eewmainMagnitude">
-                <font size="4">M</font>0.0
+    <!--地震预警框-->
+    <div id = "eew">
+        <div id="eewmainBar">
+            <div id="eewmainRight">
+                <div id="eewmainTime">01/01 00:00</div>
+                <div id="eewmainEpicenter">载入中</div>
+                <div id="eewmainDepth">0<font size="3">&nbsp;km</font></div>
+                <div id="eewmainMagnitude">
+                    <font size="4">M</font>0.0
+                </div>
             </div>
+            <div id="eewmainMaxInt">-</div>
         </div>
-        <div id="eewmainMaxInt">-</div>
+    </div>
+
+    <div id = "nsspe">
+        <div id="nsspemainBar">
+            <div id="nsspemainRight">
+                <div id="nsspemainTime">01/01 00:00</div>
+                <div id="nsspeEpicenter">Voronoi震源测算</div>
+            </div>
+            <div id="nsspeMaxInt">-</div>
+        </div>
     </div>
 
     <div id="epidis">
@@ -59,6 +80,8 @@
         </div>
         <div id="eewmainMaxInt2">-</div>
     </div>
+
+    <div class="eew"></div>
 
     <!--近期地震框-->
     <div id = "list_type" class = "list_type">CENC测定列表</div>
@@ -167,8 +190,8 @@
                 <p style="color: aliceblue;">*若低于阈值则不会播报, 推荐值: 3.0</p>
             </div>
             <div style="display: flex;">
-                <p style="color: aliceblue;">震时鼠标位置烈度显示</p>
-                <input type="checkbox" class="switch" id="mouseintopen">
+                <p style="color: aliceblue;">中国台湾Voronoi震源测算(dev)</p>
+                <input type="checkbox" class="switch" id="devopen">
             </div>
             <div class="content">
                 <p style="color: aliceblue;">UEWS-Delay服务器地址(没有留空) <br>例: http://127.0.0.1</p>
@@ -180,13 +203,13 @@
         
         <button id="ok" style="color: aliceblue; float:none;">应用</button>
         
-      </div>
-
+    </div>
 </body>
 
 </html>
 <script src="./js/settings.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/variable.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/notification.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/warning.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/getinfo.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/map.js" type="text/javascript" charset="utf-8"></script>
@@ -194,8 +217,8 @@
 <script src="./js/choise.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/rightmessage.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/notification.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/userpage.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/dev.js" type="text/javascript" charset="utf-8"></script>
 <script>
     console.log("UDTW \nPowered By RainYang")
 
@@ -217,3 +240,4 @@
         }
     }
 </script>
+
