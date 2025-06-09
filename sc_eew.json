@@ -1,1 +1,1 @@
-{"EventID": "TEST_FUTURE_EVENT","ReportTime": "15:36:00","Location": "地震模拟EEW","Longitude": "120.0","Latitude": "31.0","Magunitude": "12.0","Depth": "20","is_final": false,"from": "模拟预警中心","WarnForecast": []}
+{"EventID": "TEST_FUTURE_EVENT","ReportTime": "15:42:00","Location": "地震模拟EEW","Longitude": "120.0","Latitude": "31.0","Magunitude": "12.0","Depth": "20","is_final": false,"from": "模拟预警中心","WarnForecast": []}
