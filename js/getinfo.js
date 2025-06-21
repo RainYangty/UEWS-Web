@@ -85,7 +85,7 @@ var icljson = "";
 function getData() {
     if(listtype == "warings")
     {
-        $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
+        $.getJSON("https://mobile-new.chinaeew.cn/v1/earlywarnings?page_num=1&page_size=2?" + Date.now(), //https://mobile-new.chinaeew.cn/v1/earlywarnings?start_at=&updates=
         function (json) {
             if(icljson != json)
             {
